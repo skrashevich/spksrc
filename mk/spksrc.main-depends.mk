@@ -3,7 +3,11 @@
 
 # Common makefiles
 include ../../mk/spksrc.common.mk
-include ../../mk/spksrc.directories.mk
+
+# nothing to download
+download:
+download-all:
+checksum:
 
 # Configure the included makefiles
 NAME          = $(PKG_NAME)
@@ -11,8 +15,13 @@ COOKIE_PREFIX = $(PKG_NAME)-
 
 ifneq ($(ARCH),)
 ARCH_SUFFIX = -$(ARCH)-$(TCVERSION)
+ifneq ($(ARCH),noarch)
 TC = syno$(ARCH_SUFFIX)
 endif
+endif
+
+# Common directories (must be set after ARCH_SUFFIX)
+include ../../mk/spksrc.directories.mk
 
 #####
 
